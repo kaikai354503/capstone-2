@@ -11,12 +11,30 @@ public class Order implements Product {
 
 
 Scanner scanner = new Scanner(System.in);
-public ArrayList<Product> items = new ArrayList<>();
+private ArrayList<Product> items = new ArrayList<>();
 
 
-public Order(List<Product> initialItems){
-    this.items.addAll(initialItems);
+public void addProduct(Product product){
+    items.add(product);
+}
 
+public List<Product> getItems(){
+    return items;
+}
+
+public double getTotal(){
+    double total = 0.0;
+    for(Product p : items){
+        total += p.getPrice();
+    }
+    return total;
+}
+
+public void printReceipt(){
+    System.out.println("Receipt: ");
+    for (Product p: items){
+        System.out.println(p.getName(), p.getPrice());
+    }
 }
 
 
@@ -62,6 +80,11 @@ public void orderScreen(){
     @Override
     public double getPrice() {
         return 0;
+    }
+
+    @Override
+    public String getDetails() {
+        return "";
     }
 
     @Override

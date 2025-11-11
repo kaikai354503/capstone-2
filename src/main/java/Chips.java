@@ -25,16 +25,14 @@ public class Chips implements Product {
     }
 
     @Override
-    public Product addProduct() {
-
-
-        return null;
+    public String getDetails() {
+        return "";
     }
-
-
 
     @Override
-    public void addProduct(Product item) {
-
+    public String getName() {
+        return "";
     }
+
+
 }

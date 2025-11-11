@@ -7,23 +7,12 @@ public class Drink implements Product {
     String size;
     Scanner choice = new Scanner(System.in);
 
-    public Drink(String flavor, String size){
+    public Drink(String flavor, String size, double price){
         this.flavor = flavor;
         this.size = size;
     }
 
-    public void getDrink(String flavor, String size){
 
-        Product newDrink = new Drink(flavor, size);
-
-        newDrink.getPrice();
-
-
-        System.out.println("What drink would you like? Water | Soda ");
-        flavor = choice.nextLine().trim();
-
-
-    }
 
 
 
@@ -48,8 +37,13 @@ public class Drink implements Product {
     }
 
     @Override
-    public String getName() {
+    public String getDetails() {
         return "";
+    }
+
+    @Override
+    public String getName() {
+        return flavor;
     }
 
 }
