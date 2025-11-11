@@ -7,12 +7,31 @@ public class Drink implements Product {
     Scanner choice = new Scanner(System.in);
 
     public Drink(String flavor, String size){
-
+        this.flavor = flavor;
+        this.size = size;
     }
 
     public void getDrink(String flavor, String size){
 
+        Product newDrink = new Drink(flavor, size);
 
+        newDrink.getPrice();
+
+
+        System.out.println("What drink would you like? Water | Soda ");
+        flavor = choice.nextLine().trim();
+
+
+    }
+
+    public String getReceipt(){
+        String receipt = flavor + " " + size + "$" + getPrice();
+
+        return receipt;
+    }
+
+    @Override
+    public double getPrice() {
         System.out.println("What size would you like? Small | Medium | Large");
         size = choice.nextLine().trim();
 
@@ -26,17 +45,19 @@ public class Drink implements Product {
             price = 2.00;
         }
 
+        return price;
 
-        System.out.println("What drink would you like? Water | Soda ");
-        flavor = choice.nextLine().trim();
 
-        this.flavor = flavor;
-        this.size = size;
     }
 
     @Override
-    public double getPrice() {
+    public void addProduct() {
 
-        return price;
+    }
+
+
+    @Override
+    public void addProduct(Product item) {
+
     }
 }
