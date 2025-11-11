@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 public class ReceiptManager {
 
-   String receipts = new String("src/main/resources/Receipts.csv");
+
 
    private String generateTimeStamp(){
        LocalDateTime now = LocalDateTime.now();
@@ -17,15 +17,29 @@ public class ReceiptManager {
 
     public void saveReceipt(Order order){
 
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(receipts)){
+       String timestamp = generateTimeStamp();
+       String receipts = new String("src/main/resources/Receipts.csv" + generateTimeStamp() + ".txt");
+       File file = new File(receipts);
+
+
+
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))){
+            writer.write("Sale Receipt: " + timestamp + "\n");
+            writer.write("=================================");
+            writer.write(String.format(("%-20s %6s %8s %10s\n"), "Item", "Qty","Price", "Subtotal"));
+            for (Product item : order.items){
+                double subTotal = item.getPrice() * item.getQty();
+
+            }
+
+
+
 
 
 
 
         }    catch (IOException e) {
-            throw new RuntimeException(receipts);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(String.valueOf(receipts));
         }
 
 

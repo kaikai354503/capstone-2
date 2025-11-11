@@ -1,8 +1,8 @@
 public interface Product {
 
-    public double getPrice();
+    double getPrice();
+    String getDetails();
+    String getName();
 
-    public void addProduct();
 
-    void addProduct(Product item);
 }

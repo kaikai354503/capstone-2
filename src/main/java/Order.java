@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Order implements Product {
@@ -10,8 +11,13 @@ public class Order implements Product {
 
 
 Scanner scanner = new Scanner(System.in);
-private ArrayList<Product> items = new ArrayList<>();
+public ArrayList<Product> items = new ArrayList<>();
 
+
+public Order(List<Product> initialItems){
+    this.items.addAll(initialItems);
+
+}
 
 
 public void homeScreen (){
@@ -59,22 +65,9 @@ public void orderScreen(){
     }
 
     @Override
-    public void addProduct() {
-
+    public String getName() {
+        return "";
     }
-
-
-    @Override
-    public void addProduct(Product item) {
-        if(items != null){
-            this.items.add(item);
-
-            updateTotal();
-
-
-        }
-    }
-
 
 
     private void updateTotal(){

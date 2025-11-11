@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Drink implements Product {
     double price;
+    int qty;
     String flavor;
     String size;
     Scanner choice = new Scanner(System.in);
@@ -24,11 +25,7 @@ public class Drink implements Product {
 
     }
 
-    public String getReceipt(){
-        String receipt = flavor + " " + size + "$" + getPrice();
 
-        return receipt;
-    }
 
     @Override
     public double getPrice() {
@@ -51,13 +48,8 @@ public class Drink implements Product {
     }
 
     @Override
-    public void addProduct() {
-
+    public String getName() {
+        return "";
     }
 
-
-    @Override
-    public void addProduct(Product item) {
-
-    }
 }

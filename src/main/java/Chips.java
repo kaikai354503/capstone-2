@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Chips implements Product {
 
     String flavor;
+    int qty;
     double price = 2.50;
 
     public Chips(String flavor) {
@@ -24,10 +25,13 @@ public class Chips implements Product {
     }
 
     @Override
-    public void addProduct() {
+    public Product addProduct() {
 
 
+        return null;
     }
+
+
 
     @Override
     public void addProduct(Product item) {
