@@ -10,6 +10,7 @@ public class Drink implements Product {
     public Drink(String flavor, String size, double price){
         this.flavor = flavor;
         this.size = size;
+        this.price = price;
     }
 
 
@@ -18,19 +19,6 @@ public class Drink implements Product {
 
     @Override
     public double getPrice() {
-        System.out.println("What size would you like? Small | Medium | Large");
-        size = choice.nextLine().trim();
-
-        if (size.equalsIgnoreCase("large")){
-            price = 3.00;
-        }
-        if(size.equalsIgnoreCase("medium")){
-            price = 2.50;
-        }
-        if(size.equalsIgnoreCase("small")){
-            price = 2.00;
-        }
-
         return price;
 
 
