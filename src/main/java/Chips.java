@@ -7,7 +7,8 @@ public class Chips implements Product {
     double price = 2.50;
 
     public Chips(String flavor, double price) {
-
+        this.flavor = flavor;
+        this.price = price;
 
     }
 

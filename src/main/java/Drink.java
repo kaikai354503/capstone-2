@@ -6,7 +6,7 @@ public class Drink implements Product {
     String flavor;
     String size;
     String name = flavor;
-    Scanner choice = new Scanner(System.in);
+
 
     public Drink(String flavor, String size, double price){
         this.flavor = flavor;

@@ -6,6 +6,7 @@ public class UserInterface {
     private String size;
     private double price;
     private  String firstName, lastName;
+    private Bread bread;
 
 
     public void start(){
@@ -67,6 +68,13 @@ public class UserInterface {
 
     public void processAddProduct(){
 
+    }
+    private void addSandwich(){
+
+        Sandwich sandwich = new Sandwich(size, bread, price);
+        Sandwich.getSize();
+
+        currentOrder.addProduct(sandwich);
     }
 
     private void addDrink(){

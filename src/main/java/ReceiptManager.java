@@ -18,20 +18,20 @@ public class ReceiptManager {
     public static void saveReceipt(Order order){
 
        String timestamp = generateTimeStamp();
-       String receipts = new String("src/main/resources/Receipts.csv" + generateTimeStamp() + ".txt");
+       String receipts = new String("src/main/java/Receipts" + generateTimeStamp() + ".txt");
        File file = new File(receipts);
 
 
 
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))){
             writer.write("Sale Receipt: " + timestamp + "\n");
-            writer.write("=================================");
+            writer.write("=================================\n");
             writer.write(String.format(("%-20s %6s %8s %10s\n"), "Item", "Qty","Price", "Subtotal"));
             for (Product item : order.getItems()){
                 writer.write(String.format("%-25s $%.2f%n", item.getName(), item.getPrice()));
 
             }
-            writer.write("++++++++++++++++++++++++++++++++");
+            writer.write("*******************************\n");
             writer.write("Total: " + order.getTotal());
 
 
