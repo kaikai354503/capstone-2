@@ -5,11 +5,57 @@ public class UserInterface {
     private Scanner  scanner = new Scanner(System.in);
     private String size;
     private double price;
+    private  String firstName, lastName;
 
-    private void start(){
+
+    public void start(){
         currentOrder = new Order();
+        getFullName();
         boolean ordering = true;
+
+        while (ordering){
+            displayMenu();
+            String input = scanner.nextLine();
+
+            switch (input){
+                case"1":
+                    break;
+                case"2":
+                    addDrink();
+                    break;
+                case"3":
+                    addChips();
+                    break;
+                case"4":
+                    ordering = false;
+                    ReceiptManager.saveReceipt(currentOrder);
+                    break;
+                default:
+                    System.out.println("not a valid input try again.");
+                    break;
+            }
+        }
+        System.out.println("Order complete! Total: $" + currentOrder.getTotal());
     }
+
+    private void getFullName(){
+
+        System.out.println("Enter your first name: ");
+        firstName = scanner.nextLine().trim().toLowerCase();
+
+        System.out.println("Enter your last name: ");
+        lastName = scanner.nextLine().trim().toLowerCase();
+    }
+
+    private void displayMenu(){
+        System.out.println("====" + firstName + "'s" + "Order====");
+        System.out.println("1) Add Sandwich");
+        System.out.println("2) Add Drink");
+        System.out.println("3) Add Chip");
+        System.out.println("4) Check Out");
+        System.out.println("Enter your choice: ");
+    }
+
 
     public void displayOrder(){
 
@@ -47,7 +93,13 @@ public class UserInterface {
     }
 
     public void addChips(){
-        System.out.println("");
+        price = 2.50;
+
+            Scanner choice = new Scanner(System.in);
+            System.out.println("What kind of chips would you like? BBQ Lays | Cool Ranch Doritos | kettle Cooked Jalepenios");
+            String flavor = choice.nextLine().trim();
+            Chips chips = new Chips(flavor, price);
+            currentOrder.addProduct(chips);
     }
 
     public void processCheckOut(){

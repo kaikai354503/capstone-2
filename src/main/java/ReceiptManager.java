@@ -9,13 +9,13 @@ public class ReceiptManager {
 
 
 
-   private String generateTimeStamp(){
+   private static String generateTimeStamp(){
        LocalDateTime now = LocalDateTime.now();
        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
        return now.format(formatter);
    }
 
-    public void saveReceipt(Order order){
+    public static void saveReceipt(Order order){
 
        String timestamp = generateTimeStamp();
        String receipts = new String("src/main/resources/Receipts.csv" + generateTimeStamp() + ".txt");
@@ -27,10 +27,12 @@ public class ReceiptManager {
             writer.write("Sale Receipt: " + timestamp + "\n");
             writer.write("=================================");
             writer.write(String.format(("%-20s %6s %8s %10s\n"), "Item", "Qty","Price", "Subtotal"));
-            for (Product item : order.items){
-                double subTotal = item.getPrice() * item.getQty();
+            for (Product item : order.getItems()){
+                writer.write(String.format("%-25s $%.2f%n", item.getName(), item.getPrice()));
 
             }
+            writer.write("++++++++++++++++++++++++++++++++");
+            writer.write("Total: " + order.getTotal());
 
 
 

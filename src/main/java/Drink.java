@@ -5,6 +5,7 @@ public class Drink implements Product {
     int qty;
     String flavor;
     String size;
+    String name = flavor;
     Scanner choice = new Scanner(System.in);
 
     public Drink(String flavor, String size, double price){
@@ -24,14 +25,10 @@ public class Drink implements Product {
 
     }
 
-    @Override
-    public String getDetails() {
-        return "";
-    }
 
     @Override
     public String getName() {
-        return flavor;
+        return size + " " + flavor;
     }
 
 }

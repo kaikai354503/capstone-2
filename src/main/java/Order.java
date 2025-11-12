@@ -32,9 +32,9 @@ public double getTotal(){
 
 public void printReceipt(){
     System.out.println("Receipt: ");
-    for (Product p: items){
-        System.out.println(p.getName(), p.getPrice());
-    }
+    //for (Product p: items){
+       // System.out.println(p.getName(), p.getPrice());
+    //}
 }
 
 
@@ -80,11 +80,6 @@ public void orderScreen(){
     @Override
     public double getPrice() {
         return 0;
-    }
-
-    @Override
-    public String getDetails() {
-        return "";
     }
 
     @Override
