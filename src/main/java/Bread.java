@@ -1,16 +1,24 @@
 import java.util.Scanner;
 
 public class Bread {
-    String type;
+   private String type;
 
     public Bread (String type){
         this.type = type;
     }
 
-    public String getType(){
+    public  String getType(){
+        return type;
+    }
+
+    public static Bread chooseBread(){
+        Scanner scanner = new Scanner(System.in);
+        String type = "";
+
         System.out.println("What kind of bread would you like?");
         System.out.println("1: White | 2: Wheat | 3: rye | 4: Wrap");
-        Scanner breadType = new Scanner(System.in);
+
+        String breadType = scanner.nextLine().toLowerCase();
 
         switch (breadType){
             case "1":
@@ -18,9 +26,19 @@ public class Bread {
                 break;
             case "2":
                 type = "wheat";
-
+                break;
+            case "3":
+                type = "rye";
+                break;
+            case "4":
+                type = "wrap";
+                break;
+            default:
+                System.out.println("not a valid option try again.");
         }
 
-        return type;
+        return new Bread(type);
     }
+
+
 }

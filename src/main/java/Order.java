@@ -3,15 +3,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Order implements Product {
-    double price;
+public class Order {
     LocalDateTime orderDate;
+    double price;
     private double totalPrice = 0.0;
 
+    Scanner scanner = new Scanner(System.in);
 
-
-Scanner scanner = new Scanner(System.in);
-private ArrayList<Product> items = new ArrayList<>();
+    private ArrayList<Product> items = new ArrayList<>();
 
 
 public void addProduct(Product product){
@@ -30,22 +29,7 @@ public double getTotal(){
     return total;
 }
 
-public void printReceipt(){
-    System.out.println("Receipt: ");
-    //for (Product p: items){
-       // System.out.println(p.getName(), p.getPrice());
-    //}
-}
 
-    @Override
-    public double getPrice() {
-        return 0;
-    }
-
-    @Override
-    public String getName() {
-        return "";
-    }
 
 
     private void updateTotal(){

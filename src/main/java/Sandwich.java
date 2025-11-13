@@ -1,49 +1,30 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Sandwich implements Product{
-    double price;
+    private double basePrice;
     private String size;
     private Bread bread;
 
-    private ArrayList<Toppings> toppings = new ArrayList<>();
+    private ArrayList<Topping> toppings = new ArrayList<>();
 
-    public Sandwich (String size, Bread bread, double price){
+    public Sandwich (String size, Bread bread, double basePrice){
         this.size = size;
         this.bread = bread;
-        this.price = price;
+        this.basePrice = basePrice;
     }
 
 
-    public static void getSize(){
-        System.out.println("What size sandwich would you like?");
-        System.out.println("1) Small");
-        System.out.println("2) Medium");
-        System.out.println("3) Large");
-
-        Scanner scanner = new Scanner(System.in);
-        size = scanner.nextLine().trim();
-        switch (size){
-            case"1":
-                size = "small";
-                break;
-            case "2":
-                size = "medium";
-                break;
-            case "3":
-                size = "large";
-                break;
-            default:
-                System.out.println("not a valid option try again.");
-        }
-    }
     public void addTopping(Topping topping){
         toppings.add(topping);
     }
 
+    public  ArrayList<Topping> getToppings(){
+        return toppings;
+    }
+
     @Override
     public double getPrice() {
-        double total = bread.getPrice();
+        double total = basePrice;
         for(Topping t : toppings){
             total += t.getPrice();
         }
