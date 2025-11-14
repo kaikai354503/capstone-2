@@ -83,7 +83,7 @@ public class UserInterface {
 
 
 
-    public Sandwich createSandwich(){
+    public void createSandwich(){
 
 
         System.out.println("What size sandwich would you like?");
@@ -98,10 +98,10 @@ public class UserInterface {
         double cheesePrice = 0;
         double extraMeatPrice = 0;
         double extraCheesePrice = 0;
-        boolean choosingSize = true;
 
 
-        while (choosingSize){
+
+
             switch (choice) {
                 case "1":
                     size = "small";
@@ -110,7 +110,7 @@ public class UserInterface {
                     cheesePrice = 0.75;
                     extraMeatPrice = 0.50;
                     extraCheesePrice = 0.30;
-                    choosingSize = false;
+
                 break;
                 case "2":
                     size = "medium";
@@ -119,7 +119,7 @@ public class UserInterface {
                     cheesePrice = 1.50;
                     extraMeatPrice = 1.00;
                     extraCheesePrice = 0.60;
-                    choosingSize = false;
+
 
                 break;
             case "3":
@@ -129,16 +129,16 @@ public class UserInterface {
                     cheesePrice = 2.25;
                     extraMeatPrice = 1.50;
                     extraCheesePrice = 0.90;
-                    choosingSize = false;
+
 
                 break;
             default:
                 System.out.println("not a valid option try again.");
-                return createSandwich();
+
         }
 
 
-        }
+
         Bread breadChoice = Bread.chooseBread();
 
         Sandwich sandwich = new Sandwich(size, breadChoice, basePrice);
@@ -292,7 +292,6 @@ public class UserInterface {
         System.out.println("Sandwich added to order.");
         System.out.println(sandwich);
         currentOrder.addProduct(sandwich);
-        return sandwich;
     }
 
 

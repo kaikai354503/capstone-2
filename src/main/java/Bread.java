@@ -3,7 +3,7 @@ import java.util.Scanner;
 @SuppressWarnings("ALL")
 public class Bread {
    private String type;
-   public boolean choosingBread = true;
+
 
     public Bread (String type){
         this.type = type;
@@ -17,7 +17,7 @@ public class Bread {
     public static Bread chooseBread(){
             Scanner scanner = new Scanner(System.in);
             String type = "";
-        while (chooseBread().choosingBread) {
+
             System.out.println("What kind of bread would you like?");
             System.out.println("1: White | 2: Wheat | 3: rye | 4: Wrap");
 
@@ -40,7 +40,7 @@ public class Bread {
                     System.out.println("not a valid option try again.");
                     return chooseBread();
             }
-        }
+
 
 
         return new Bread(type);
