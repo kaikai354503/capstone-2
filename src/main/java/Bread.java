@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+@SuppressWarnings("ALL")
 public class Bread {
    private String type;
    public boolean choosingBread = true;

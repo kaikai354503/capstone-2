@@ -1,3 +1,4 @@
+@SuppressWarnings("ALL")
 public class Meat extends Toppings {
     private boolean extraMeat;
     public Meat(String name, double price) {

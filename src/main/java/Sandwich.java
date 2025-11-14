@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+@SuppressWarnings("ALL")
 public class Sandwich implements Product{
     private double basePrice;
     private String size;

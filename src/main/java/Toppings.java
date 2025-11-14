@@ -1,3 +1,4 @@
+@SuppressWarnings("ALL")
 public class Toppings {
     private String name;
     private double price;
