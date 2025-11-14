@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class Order {
     LocalDateTime orderDate;
     double price;
+    String firstName;
+    String lastName;
     private double totalPrice = 0.0;
 
     Scanner scanner = new Scanner(System.in);
@@ -30,14 +32,16 @@ public double getTotal(){
 }
 
 
+public void setCustomer(String firstName, String lastName){
+    this.firstName = firstName;
+    this.lastName = lastName;
+}
+
+String getCustomerName(){
+    return firstName + " " + lastName;
+}
 
 
-    private void updateTotal(){
-    this.totalPrice = 0.0;
-    for(Product item : items){
-        this.totalPrice += item.getPrice();
-    }
-    }
 
     public double getTotalPrice(){
     return this.totalPrice;

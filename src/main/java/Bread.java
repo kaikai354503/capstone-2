@@ -10,6 +10,7 @@ public class Bread {
     public  String getType(){
         return type;
     }
+    
 
     public static Bread chooseBread(){
         Scanner scanner = new Scanner(System.in);
@@ -37,8 +38,12 @@ public class Bread {
                 System.out.println("not a valid option try again.");
         }
 
+
         return new Bread(type);
     }
 
-
+    @Override
+    public String toString(){
+        return type;
+    }
 }

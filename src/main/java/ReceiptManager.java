@@ -11,28 +11,96 @@ public class ReceiptManager {
 
    private static String generateTimeStamp(){
        LocalDateTime now = LocalDateTime.now();
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd | HH:mm:ss");
        return now.format(formatter);
    }
 
     public static void saveReceipt(Order order){
 
        String timestamp = generateTimeStamp();
-       String receipts = new String("src/main/java/Receipts" + generateTimeStamp() + ".txt");
+       String receipts = new String("src/main/resources/Receipts/" + generateTimeStamp() + ".txt");
        File file = new File(receipts);
-
+        String itemName;
 
 
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))){
-            writer.write("Sale Receipt: " + timestamp + "\n");
-            writer.write("=================================\n");
-            writer.write(String.format(("%-20s %6s %8s %10s\n"), "Item", "Qty","Price", "Subtotal"));
-            for (Product item : order.getItems()){
-                writer.write(String.format("%-25s $%.2f%n", item.getName(), item.getPrice()));
 
+            int maxDescLength = 50;
+
+            for(Product item : order.getItems()){
+               String name;
+                if (item.isSandwich()){
+                    name =((Sandwich)item).toString();
+                }
+                else {
+                    name = item.getName();
+                }
+
+                maxDescLength = Math.max(maxDescLength, name.length());
+
+                if(item.isSandwich()){
+                    Sandwich s = (Sandwich) item;
+                    for (Toppings t : s.getToppings()) {
+                        if (t.isFreeTopping()) {
+                            maxDescLength = Math.max(maxDescLength, t.getName().length() + 3);
+                        }
+                    }
+
+                    if(s.isToasted()){
+                            maxDescLength = Math.max(maxDescLength, "Toasted".length() + 3);
+                    }
+
+                }
             }
-            writer.write("*******************************\n");
-            writer.write("Total: " + order.getTotal());
+
+            String itemFormat = "%-" + (maxDescLength + 2) + "s | 4%7.2f%n";
+            String toppingFormat = "    + %-" + (maxDescLength - 1) + "s%n";
+
+
+            writer.write("Customer:" + order.getCustomerName() + "'s    ");
+            writer.write("Sale Receipt: " + timestamp + "\n");
+            writer.write("=".repeat(maxDescLength + 20) + "\n");
+            writer.write(String.format("%-" + (maxDescLength + 2) + "s %11s%n", "Item Description", "price" ));
+            writer.write("=".repeat(maxDescLength + 20) + "\n");
+
+            for (Product item : order.getItems()){
+                if(item.isSandwich()) {
+                    Sandwich sandwich = (Sandwich) item;
+
+                    writer.write(String.format(itemFormat,
+                            sandwich.toString(),
+                            sandwich.getPrice()
+                    ));
+
+                    for (Toppings topping : sandwich.getToppings()) {
+
+
+                        if (topping.isFreeTopping()) {
+                            writer.write(String.format(toppingFormat,
+                                    topping.getName()
+                            ));
+                        }
+                    }
+
+                    if (sandwich.isToasted()) {
+                        writer.write(String.format(toppingFormat, "Toasted"));
+                    }
+                }
+                else {
+                    writer.write(String.format(itemFormat,
+                            item.getName(),
+                            item.getPrice()
+                    ));
+                }
+            }
+
+
+
+
+
+            writer.write("=".repeat(maxDescLength + 20) + "\n");
+            writer.write(String.format(itemFormat, "Total: ",order.getTotal()));
+
 
 
 

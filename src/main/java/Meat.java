@@ -1,23 +1,13 @@
-public class Meat extends Topping {
+public class Meat extends Toppings {
     private boolean extraMeat;
     public Meat(String name, double price) {
         super(name, price);
-        this.extraMeat = extraMeat;
+
     }
 
-    public boolean isExtraMeat(){
-
-        return extraMeat;
-    }
-
-
-    public double getPrice(){
-        double price = super.getPrice();{
-            if(extraMeat){
-                price += 0.75;
-            }
-        }
-        return price;
+    @Override
+    public boolean isMeat(){
+        return true;
     }
 
 

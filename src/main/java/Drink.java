@@ -31,4 +31,9 @@ public class Drink implements Product {
         return size + " " + flavor;
     }
 
+    @Override
+    public boolean isSandwich() {
+        return false;
+    }
+
 }

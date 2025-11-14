@@ -1,9 +1,9 @@
-public class Topping {
+public class Toppings {
     private String name;
     private double price;
     private boolean isPremium;
 
-    public Topping(String name, double price) {
+    public Toppings(String name, double price) {
         this.name = name;
         this.price = price;
     }
@@ -16,12 +16,17 @@ public class Topping {
         return price;
     }
 
-    public boolean isPremium(){
-        return isPremium;
+
+
+
+    public boolean isMeat(){
+        return false;
     }
-    public class Meat extends Topping{
-        public Meat(String name, double price){
-            super(name, price);
-        }
+    public boolean  isCheese(){
+        return false;
+    }
+
+    public boolean  isFreeTopping(){
+        return false;
     }
 }

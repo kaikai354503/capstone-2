@@ -4,5 +4,5 @@ public interface Product {
 
     String getName();
 
-
+    public boolean isSandwich();
 }

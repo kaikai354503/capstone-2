@@ -27,5 +27,10 @@ public class Chips implements Product {
         return flavor;
     }
 
+    @Override
+    public boolean isSandwich() {
+        return false;
+    }
+
 
 }
