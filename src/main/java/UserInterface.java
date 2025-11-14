@@ -1,16 +1,19 @@
 import java.util.Scanner;
 
+@SuppressWarnings({"EnhancedSwitchMigration", "LoopConditionNotUpdatedInsideLoop", "ConstantValue", "unused", "FieldCanBeLocal", "RedundantSuppression"})
 public class UserInterface {
     private Order currentOrder;
-    private Scanner  scanner = new Scanner(System.in);
+    private final Scanner  scanner = new Scanner(System.in);
     private String size;
     private double price;
     private  String firstName, lastName;
-    private Bread bread;
+
     boolean ordering;
 
 
     public void start(){
+
+        homeScreen();
         currentOrder = new Order();
         getFullName();
         ordering = true;
@@ -33,7 +36,7 @@ public class UserInterface {
                     processCheckOut();
                     break;
                 case"5":
-                    start();
+                    homeScreen();
                     break;
                 default:
                     System.out.println("not a valid input try again.");
@@ -54,6 +57,20 @@ public class UserInterface {
         currentOrder.setCustomer(firstName, lastName);
     }
 
+    public  void homeScreen(){
+        System.out.println("Welcome to The Meat Market! How can I help you?  1:New Order | 2:Exit");
+        String choice = scanner.nextLine().trim();
+
+        switch (choice){
+            case"1":
+                break;
+            case "2":
+                System.exit(0);
+                break;
+
+        }
+    }
+
     private void displayMenu(){
         System.out.println("====" + firstName + "'s" + "Order====");
         System.out.println("1) Add Sandwich");
@@ -64,10 +81,6 @@ public class UserInterface {
         System.out.println("Enter your choice: ");
     }
 
-
-    public void displayOrder(){
-
-    }
 
 
     public Sandwich createSandwich(){
@@ -85,36 +98,44 @@ public class UserInterface {
         double cheesePrice = 0;
         double extraMeatPrice = 0;
         double extraCheesePrice = 0;
+        boolean choosingSize = true;
 
-        switch (choice){
-            case"1":
-                size = "small";
-                basePrice = 5.50;
-                meatPrice = 1.00;
-                cheesePrice = 0.75;
-                extraMeatPrice = 0.50;
-                extraCheesePrice = 0.30;
+
+        while (choosingSize){
+            switch (choice) {
+                case "1":
+                    size = "small";
+                    basePrice = 5.50;
+                    meatPrice = 1.00;
+                    cheesePrice = 0.75;
+                    extraMeatPrice = 0.50;
+                    extraCheesePrice = 0.30;
+                    choosingSize = false;
                 break;
-            case "2":
-                size = "medium";
-                basePrice =7.00;
-                meatPrice = 2.00;
-                cheesePrice = 1.50;
-                extraMeatPrice = 1.00;
-                extraCheesePrice = 0.60;
+                case "2":
+                    size = "medium";
+                    basePrice = 7.00;
+                    meatPrice = 2.00;
+                    cheesePrice = 1.50;
+                    extraMeatPrice = 1.00;
+                    extraCheesePrice = 0.60;
+                    choosingSize = false;
 
                 break;
             case "3":
-                size = "large";
-                basePrice =8.50;
-                meatPrice = 3.00;
-                cheesePrice = 2.25;
-                extraMeatPrice = 1.50;
-                extraCheesePrice = 0.90;
+                    size = "large";
+                    basePrice = 8.50;
+                    meatPrice = 3.00;
+                    cheesePrice = 2.25;
+                    extraMeatPrice = 1.50;
+                    extraCheesePrice = 0.90;
+                    choosingSize = false;
 
                 break;
             default:
                 System.out.println("not a valid option try again.");
+                return createSandwich();
+        }
 
 
         }
@@ -128,35 +149,39 @@ public class UserInterface {
         System.out.println("Choose one meat.");
         System.out.println("1:Steak | 2:Ham | 3:Salami | 4:Roast Beef | 5:Chicken | 6:Bacon | 7: No Meat ");
         String [] meatChoices = scanner.nextLine().split("");
+            for (String m : meatChoices) {
+                switch (m) {
+                    case "1":
+                        sandwich.addTopping(new Meat("Steak", meatPrice));
+                        break;
+                    case "2":
+                        sandwich.addTopping(new Meat("Ham", meatPrice));
+                        break;
+                    case "3":
+                        sandwich.addTopping(new Meat("Salami", meatPrice));
+                        break;
+                    case "4":
+                        sandwich.addTopping(new Meat("Roast Beef", meatPrice));
+                        break;
+                    case "5":
+                        sandwich.addTopping(new Meat("Chicken", meatPrice));
+                        break;
+                    case "6":
+                        sandwich.addTopping(new Meat("Bacon", meatPrice));
+                        break;
+                    case "7":
+                        sandwich.addTopping(new Meat("", 0));
+                        break;
+                    default:
+                        System.out.println("Try again.");
+                        break;
+                }
 
-        for (String m : meatChoices){
-            switch (m){
-                case "1":
-                    sandwich.addTopping(new Meat("Steak", meatPrice));
-                    break;
-                case "2":
-                    sandwich.addTopping(new Meat("Ham", meatPrice));
-                    break;
-                case "3":
-                    sandwich.addTopping(new Meat("Salami", meatPrice));
-                    break;
-                case "4":
-                    sandwich.addTopping(new Meat("Roast Beef", meatPrice));
-                    break;
-                case "5":
-                    sandwich.addTopping(new Meat("Chicken", meatPrice));
-                    break;
-                case "6":
-                    sandwich.addTopping(new Meat("Bacon", meatPrice));
-                    break;
-                case "7":
-                    sandwich.addTopping(new Meat("", 0));
-            }
         }
         // asks for double meat.
         System.out.println("Do you want double meat? Y/N");
-        if (scanner.nextLine().toUpperCase().trim().equals("Y") && price > 0 ){
-            sandwich.addTopping(new Meat("Double Meat", extraMeatPrice));
+        if (scanner.nextLine().toUpperCase().trim().equals("Y") && meatPrice > 0 ){
+            sandwich.addTopping(new Meat("+Extra Meat", extraMeatPrice));
         }
 
         //add cheese
@@ -182,11 +207,12 @@ public class UserInterface {
                 break;
             default:
                 System.out.println("not a valid entry.");
+
         }
         //extra cheese
         System.out.println("Do you want double cheese? Y/N");
-        if (scanner.nextLine().toUpperCase().trim().equals("Y") && price > 0 ){
-            sandwich.addTopping(new Cheese("Double Cheese", extraCheesePrice));
+        if (scanner.nextLine().toUpperCase().trim().equals("Y") && cheesePrice > 0 ){
+            sandwich.addTopping(new Cheese("+Extra Cheese", extraCheesePrice));
         }
         //Extra toppings
         System.out.println("Select one free topping.");
@@ -273,22 +299,24 @@ public class UserInterface {
 
     private void addDrink(){
         System.out.println("what drink would you like? 1: water | 2: soda ");
-        String flavor = scanner.nextLine().trim();
-        switch(flavor){
+        String flavor = "";
+        String input = scanner.nextLine().trim();
+        switch(input){
             case"1":
                 flavor = "water";
                 price = 0.00;
+                size = "";
+                break;
             case "2":
                 flavor = "soda";
+                break;
 
             default:
 
         }
 
 
-        if(flavor.equals("water")){
-            price = 0.00;
-        } else if (flavor.equals("soda")) {
+        if(flavor.equals("soda")){
             System.out.println("What size would you like? 1:Small | 2:Medium | 3:Large");
             size = scanner.nextLine().trim();
 
@@ -311,6 +339,7 @@ public class UserInterface {
 
         Drink drink = new Drink(flavor, size, price);
         currentOrder.addProduct(drink);
+        System.out.println( flavor + "Added to order.");
     }
 
     public void addChips(){
@@ -332,6 +361,7 @@ public class UserInterface {
             }
             Chips chips = new Chips(flavor, price);
             currentOrder.addProduct(chips);
+        System.out.println( flavor + "Added to order.");
     }
 
     public void processCheckOut(){
@@ -353,10 +383,10 @@ public class UserInterface {
     }
 
 
-
-    public void getFirstName(){
-        this.firstName =firstName;
-
     }
 
-}
+
+
+
+
+

@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Chips implements Product {
 
     String flavor;
-    int qty;
+
     double price = 2.50;
 
     public Chips(String flavor, double price) {

@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Order {
     LocalDateTime orderDate;
-    double price;
+
     String firstName;
     String lastName;
     private double totalPrice = 0.0;

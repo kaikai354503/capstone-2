@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class Drink implements Product {
     double price;
-    int qty;
+
     String flavor;
     String size;
-    String name = flavor;
+
 
 
     public Drink(String flavor, String size, double price){

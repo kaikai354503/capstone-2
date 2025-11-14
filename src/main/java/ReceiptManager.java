@@ -11,7 +11,7 @@ public class ReceiptManager {
 
    private static String generateTimeStamp(){
        LocalDateTime now = LocalDateTime.now();
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd | HH:mm:ss");
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd  HH:mm:ss");
        return now.format(formatter);
    }
 
@@ -20,7 +20,7 @@ public class ReceiptManager {
        String timestamp = generateTimeStamp();
        String receipts = new String("src/main/resources/Receipts/" + generateTimeStamp() + ".txt");
        File file = new File(receipts);
-        String itemName;
+
 
 
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))){
@@ -46,6 +46,7 @@ public class ReceiptManager {
                         }
                     }
 
+
                     if(s.isToasted()){
                             maxDescLength = Math.max(maxDescLength, "Toasted".length() + 3);
                     }
@@ -55,6 +56,7 @@ public class ReceiptManager {
 
             String itemFormat = "%-" + (maxDescLength + 2) + "s | 4%7.2f%n";
             String toppingFormat = "    + %-" + (maxDescLength - 1) + "s%n";
+            String paidToppingFormat = "    + %-"+ (maxDescLength + 2) + "s %11.2f%n";
 
 
             writer.write("Customer:" + order.getCustomerName() + "'s    ");
@@ -78,6 +80,14 @@ public class ReceiptManager {
                         if (topping.isFreeTopping()) {
                             writer.write(String.format(toppingFormat,
                                     topping.getName()
+                            ));
+                        }
+                    }
+                    for (Toppings topping : sandwich.getToppings()) {
+                        if(topping.getName().startsWith("+Extra")){
+                            writer.write(String.format(paidToppingFormat,
+                                    topping.getName(),
+                                    topping.getPrice()
                             ));
                         }
                     }
